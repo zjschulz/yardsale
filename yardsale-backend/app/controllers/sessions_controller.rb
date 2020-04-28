@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+
     def create
       user = User
               .find_by(email: params["user"]["email"])
@@ -15,4 +16,5 @@ class SessionsController < ApplicationController
         render json: { status: 401 }
       end
     end
+    
   end

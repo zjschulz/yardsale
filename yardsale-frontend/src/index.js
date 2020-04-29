@@ -1,2 +1,2 @@
-const app = new AppContainer()
-console.log(app)
+//const app = new AppContainer()
+//console.log(app)

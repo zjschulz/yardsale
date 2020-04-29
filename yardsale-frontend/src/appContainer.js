@@ -1,8 +1,8 @@
 class AppContainer {
     items = []
-    const BASE_URL = "http://localhost:3000"
-    const ITEMS_URL = `${BASE_URL}/items`
-    const main = document.querySelector("main")
+    url = 'http://localhost:3000'
+    ITEMS_URL = `${url}/items`
+    main = document.querySelector("main")
 
     document.addEventListener("DOMContentLoaded", () => loadItems())
 

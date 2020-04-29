@@ -3,5 +3,5 @@ class User < ApplicationRecord
     validates_presence_of :email
     validates_uniqueness_of :email
     has_many :shops
-    has_many :items, through: :shops
+    has_many :items, through: :shops 
 end

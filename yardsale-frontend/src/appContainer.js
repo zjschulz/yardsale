@@ -1,30 +1,18 @@
 class AppContainer {
-    items = []
+    users = []
     url = 'http://localhost:3000'
-    ITEMS_URL = `${url}/items`
-    main = document.querySelector("main")
 
-    document.addEventListener("DOMContentLoaded", () => loadItems())
-
-    const loadItems = () => {
-        fetch(ITEMS_URL)
-        .then(res => res.json())
-        .then(json => {
-            json.forEach(item => renderItem(item))
-        })
+    //fetch request
+    getItems() {
+        console.log("test getItems");
+        fetch(this.url + '/items')
+        .then(resp => resp.json())
+        .then(data => console.log(data))
+        .catch(err => alert(err));
     }
 
-    const renderItem = (itemHash) => {
-        const div = document.createElement("div")
-        const p = document.createElement("p")
+    //create DOM elements
+    renderItems() {
 
-        div.setAttribute("class", "card")
-        div.setAttribute("data-id", itemHash.id)
-        p.innerHTML = itemHash.name
-        p.innerHTML = itemHash.description
-        p.innerHTML = itemHash.image_url
-        p.innerHTML = itemHash.price
-        
     }
-
 }

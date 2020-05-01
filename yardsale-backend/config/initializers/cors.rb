@@ -16,7 +16,7 @@
 
    allow do
     #domain we are pushing the app up to, on a server/domain
-    origins 'file:///C:/Users/zjsch/yardsale/yardsale-frontend/index.html'
+    origins 'file:///C:/Users/zjsch/yardsale/yardsale-frontend/appContainer.html'
 
     resource '*',
       headers: :any,

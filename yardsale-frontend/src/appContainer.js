@@ -1,6 +1,11 @@
 class AppContainer {
-    users = []
-    url = 'http://localhost:3000'
+    items = []
+    url = "http://localhost:3000"
+
+    bindEventListeners() {
+        const btn = document.getElementById('createItemList');
+
+    }
 
     //fetch request
     getItems() {
@@ -14,5 +19,5 @@ class AppContainer {
     //create DOM elements
     renderItems() {
 
-    }
+    } 
 }

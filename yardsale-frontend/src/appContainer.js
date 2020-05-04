@@ -5,7 +5,7 @@ class AppContainer {
 
     bindEventListeners() {
         const btn = document.getElementById("createItemList")
-        btn.addEventListener("click", AppContainer.getItems);
+        btn.addEventListener("click", console.log("Figure Out How To call getItems during bindEventListeners!"));
     };
 
     //fetch request
@@ -13,10 +13,10 @@ class AppContainer {
         fetch(this.url + '/items')
         .then(resp => resp.json())
         .then(data => {
-            console.log(data);
+            //console.log(data);
             data.forEach(item => {
                 new Item(item.name, item.description, item.image_url, item.price, item.user)
-                console.log(AppContainer.items)
+                //console.log(AppContainer.items)
             });
             this.renderItems();
         })

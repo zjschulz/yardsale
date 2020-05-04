@@ -4,4 +4,9 @@ class ItemsController < ApplicationController
         render :json => Item.all
     end
 
+    def destroy
+        Item.find(params[:id]).destroy
+        redirect_to '/items'
+    end
+
 end

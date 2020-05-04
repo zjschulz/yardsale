@@ -3,9 +3,13 @@ class AppContainer {
     user = [];
     url = "http://localhost:3000";
 
+    //tell the buttons what to do
     bindEventListeners() {
         const cil = document.getElementById("createItemList")
         cil.addEventListener("click", this.renderItems);
+
+        const dil = document.getElementById("deleteItems")
+        dil.addEventListener("click", this.deleteItems);
     };
 
     //fetch request
@@ -14,7 +18,7 @@ class AppContainer {
         .then(resp => resp.json())
         .then(data => {
             data.forEach(item => {
-                new Item(item.name, item.description, item.image_url, item.price, item.user)
+                new Item(item.id, item.name, item.description, item.image_url, item.price, item.user)
             });
             //this.renderItems();
         })
@@ -73,7 +77,13 @@ class AppContainer {
                     'Content-type': 'application/json'
                 }
             })
-            .then(resp => console.log(resp))
+            .then(resp => resp.json())
+            .then(data => console.log(data))
         })
+    }
+
+    //renders form to create new item
+    renderNewItemForm() {
+
     }
 }

@@ -1,23 +1,36 @@
 class AppContainer {
-    items = []
-    url = "http://localhost:3000"
+    static items = [];
+    user = [];
+    url = "http://localhost:3000";
 
     bindEventListeners() {
-        const btn = document.getElementById('createItemList');
-
-    }
+        const btn = document.getElementById("createItemList")
+        btn.addEventListener("click", AppContainer.getItems);
+    };
 
     //fetch request
     getItems() {
-        console.log("test getItems");
         fetch(this.url + '/items')
         .then(resp => resp.json())
-        .then(data => console.log(data))
+        .then(data => {
+            console.log(data);
+            data.forEach(item => {
+                new Item(item.name, item.description, item.image_url, item.price, item.user)
+                console.log(AppContainer.items)
+            });
+            this.renderItems();
+        })
         .catch(err => alert(err));
-    }
+    };
 
     //create DOM elements
     renderItems() {
-
-    } 
+        const ul = document.createElement('ul');
+        AppContainer.items.forEach(item => {
+            const li = document.createElement('li');
+            li.innerText = item.name;
+            ul.appendChild(li);
+        })
+        document.body.appendChild(ul)
+    };
 }

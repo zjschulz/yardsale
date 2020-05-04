@@ -5,7 +5,7 @@ class AppContainer {
 
     bindEventListeners() {
         const cil = document.getElementById("createItemList")
-        cil.addEventListener("click", console.log("Figure Out How To call getItems during bindEventListeners!"));
+        cil.addEventListener("click", this.renderItems);
     };
 
     //fetch request
@@ -13,12 +13,10 @@ class AppContainer {
         fetch(this.url + '/items')
         .then(resp => resp.json())
         .then(data => {
-            //console.log(data);
             data.forEach(item => {
                 new Item(item.name, item.description, item.image_url, item.price, item.user)
-                //console.log(AppContainer.items)
             });
-            this.renderItems();
+            //this.renderItems();
         })
         .catch(err => alert(err));
     };
@@ -61,8 +59,21 @@ class AppContainer {
         p1.innerHTML = item.price
         btn.setAttribute('type',"button")
         btn.setAttribute('class',"btn btn-primary btn-sm")
-        btn.setAttribute('id', item.user.email)
+        btn.setAttribute('id', "item.user.email")
         btn.innerHTML = "Email Seller"
         })
     };
+
+    //delete items
+    deleteItems() {
+        items.forEach(item => {
+            fetch(`http://localhost:3000/items/${item.id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            })
+            .then(resp => console.log(resp))
+        })
+    }
 }

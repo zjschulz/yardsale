@@ -4,8 +4,8 @@ class AppContainer {
     url = "http://localhost:3000";
 
     bindEventListeners() {
-        const btn = document.getElementById("createItemList")
-        btn.addEventListener("click", console.log("Figure Out How To call getItems during bindEventListeners!"));
+        const cil = document.getElementById("createItemList")
+        cil.addEventListener("click", console.log("Figure Out How To call getItems during bindEventListeners!"));
     };
 
     //fetch request
@@ -61,6 +61,7 @@ class AppContainer {
         p1.innerHTML = item.price
         btn.setAttribute('type',"button")
         btn.setAttribute('class',"btn btn-primary btn-sm")
+        btn.setAttribute('id', item.user.email)
         btn.innerHTML = "Email Seller"
         })
     };

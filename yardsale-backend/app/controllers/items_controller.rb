@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
 
     def destroy
         Item.find(params[:id]).destroy
-        redirect_to '/items'
+        render :json => {id: params[:id], message: "Record deleted"}
     end
 
 end

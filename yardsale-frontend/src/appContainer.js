@@ -10,6 +10,9 @@ class AppContainer {
 
         const dil = document.getElementById("deleteItems")
         dil.addEventListener("click", this.deleteItems);
+
+        const cni = document.getElementById("createNewItem")
+        cni.addEventListener("click", this.renderNewItemForm);
     };
 
     //fetch request
@@ -68,22 +71,90 @@ class AppContainer {
         })
     };
 
-    //delete items
+    //delete items: would like to change this to delete a single item when called upon by an eventlistener
     deleteItems() {
         items.forEach(item => {
             fetch(`http://localhost:3000/items/${item.id}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-type': 'application/json'
-                }
+                method: 'DELETE'
             })
             .then(resp => resp.json())
             .then(data => console.log(data))
         })
     }
 
-    //renders form to create new item
+    //renders form to create new item when called upon by event listener
     renderNewItemForm() {
+        // Create elements needed to build a card  
+        const div = document.createElement('div')
+        const div1 = document.createElement('div')
+        const form = document.createElement('form')
+        const h4 = document.createElement('h4')
+        const label = document.createElement('label')
+        const p = document.createElement('p')
+        const p1 = document.createElement('p')
+        const p2 = document.createElement('p')
+        const p3 = document.createElement('p')
+        const p4 = document.createElement('p')
+        const input = document.createElement('input')
+        const input1 = document.createElement('input')
+        const input2 = document.createElement('input')
+        const input3 = document.createElement('input')
+        const input4 = document.createElement('input')
+        const btn = document.createElement('button')
+
+        // Append newly created elements into the DOM
+        const body = document.querySelector('body');
+        body.append(div)
+        div.append(div1)
+        div1.append(form)
+        form.append(h4)
+        h4.append(label)
+        form.append(p)
+        p.append(input)
+        form.append(p1)
+        p1.append(input1)
+        form.append(p2)
+        p2.append(input2)
+        form.append(p3)
+        p3.append(input3)
+        form.append(p4)
+        p4.append(input4)
+        form.append(btn)
+
+        // Set content and attributes
+        div.setAttribute('class',"card text-white bg-info mb-3")
+        div.setAttribute('style',"max-width: 20rem;")
+        div1.setAttribute('class',"card-body")
+        label.setAttribute('for',"")
+        label.innerHTML = "New Item"
+        p.setAttribute('class',"card-text")
+        p1.setAttribute('class',"card-text")
+        p2.setAttribute('class',"card-text")
+        p3.setAttribute('class',"card-text")
+        p4.setAttribute('class',"card-text")
+        input.setAttribute('type',"text")
+        input1.setAttribute('type',"text")
+        input2.setAttribute('type',"text")
+        input3.setAttribute('type',"text")
+        input4.setAttribute('type',"text")
+        input.setAttribute('name',"name")
+        input1.setAttribute('name',"description")
+        input2.setAttribute('name',"image_url")
+        input3.setAttribute('name',"price")
+        input4.setAttribute('name',"user")
+        input.insertAdjacentText('afterend', "Name")
+        input1.insertAdjacentText('afterend', "Description")
+        input2.insertAdjacentText('afterend', "Image URL")
+        input3.insertAdjacentText('afterend', "Price")
+        input4.insertAdjacentText('afterend', "User")        
+        btn.setAttribute('type',"button")
+        btn.setAttribute('class',"btn btn-primary btn-sm")
+        btn.setAttribute('id', "submitNewItem")
+        btn.innerHTML = "Submit"
+    }
+
+    //renders form to create new user when called upon by event listener    
+    renderNewUserForm() {
 
     }
 }

@@ -13,8 +13,11 @@ class AppContainer {
 
         const cni = document.getElementById("createNewItem")
         cni.addEventListener("click", this.renderNewItemForm);
-    };
 
+        const snu = document.getElementById("createNewUser")
+        snu.addEventListener("click", this.renderNewUserForm);
+    };
+    
     //fetch request
     getItems() {
         fetch(this.url + '/items')
@@ -155,6 +158,56 @@ class AppContainer {
 
     //renders form to create new user when called upon by event listener    
     renderNewUserForm() {
+        // Create elements needed to build a card  
+        const div = document.createElement('div')
+        const div1 = document.createElement('div')
+        const form = document.createElement('form')
+        const h4 = document.createElement('h4')
+        const label = document.createElement('label')
+        const p = document.createElement('p')
+        const p1 = document.createElement('p')
+        const p2 = document.createElement('p')
+        const input = document.createElement('input')
+        const input1 = document.createElement('input')
+        const input2 = document.createElement('input')
+        const btn = document.createElement('button')
 
+        // Append newly created elements into the DOM
+        const body = document.querySelector('body');
+        body.append(div)
+        div.append(div1)
+        div1.append(form)
+        form.append(h4)
+        h4.append(label)
+        form.append(p)
+        p.append(input)
+        form.append(p1)
+        p1.append(input1)
+        form.append(p2)
+        p2.append(input2)
+        form.append(btn)
+
+        // Set content and attributes
+        div.setAttribute('class',"card text-white bg-warning mb-3")
+        div.setAttribute('style',"max-width: 20rem;")
+        div1.setAttribute('class',"card-body")
+        label.setAttribute('for',"")
+        label.innerHTML = "New Item"
+        p.setAttribute('class',"card-text")
+        p1.setAttribute('class',"card-text")
+        p2.setAttribute('class',"card-text")
+        input.setAttribute('type',"text")
+        input1.setAttribute('type',"text")
+        input2.setAttribute('type',"text")
+        input.setAttribute('name',"name")
+        input1.setAttribute('name',"description")
+        input2.setAttribute('name',"image_url")
+        input.insertAdjacentText('afterend', "Email")
+        input1.insertAdjacentText('afterend', "Password")
+        input2.insertAdjacentText('afterend', "Confirm Password")
+        btn.setAttribute('type',"button")
+        btn.setAttribute('class',"btn btn-primary btn-sm")
+        btn.setAttribute('id', "submitNewUser")
+        btn.innerHTML = "Submit"
     }
 }

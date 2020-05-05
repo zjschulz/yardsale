@@ -106,7 +106,6 @@ class AppContainer {
         const input3 = document.createElement('input')
         const input4 = document.createElement('input')
         const btn = document.createElement('button')
-
         // Append newly created elements into the DOM
         const body = document.querySelector('body');
         body.append(div)
@@ -156,11 +155,11 @@ class AppContainer {
         btn.setAttribute('class',"btn btn-primary btn-sm")
         btn.setAttribute('id', "submitNewItem")
         btn.innerHTML = "Submit";
-
-        this.test();
+        this.bindSubmitItem();
     }
 
-    test() {
+    //binding submit new item button to createItem function
+    bindSubmitItem() {
         const sni = document.getElementById("submitNewItem")
         sni.addEventListener('click', this.createItem);
     }
@@ -220,7 +219,25 @@ class AppContainer {
         btn.innerHTML = "Submit";
     }
 
+    //stores newly created item in api
     createItem() {
         console.log("hello")
+        fetch(`${this.url}/items`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                name: "something",
+                image_url: "something",
+                description: "something",
+                price: "something",
+                user: "something"
+            })
+        })
+        .then(resp => resp.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err));
     }
 }

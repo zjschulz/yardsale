@@ -12,12 +12,12 @@ class AppContainer {
         dil.addEventListener("click", this.deleteItems);
 
         const cni = document.getElementById("createNewItem")
-        cni.addEventListener("click", this.renderNewItemForm);
+        cni.addEventListener("click", this.renderNewItemForm.bind(this));
 
-        const snu = document.getElementById("createNewUser")
-        snu.addEventListener("click", this.renderNewUserForm);
+        const cnu = document.getElementById("createNewUser")
+        cnu.addEventListener("click", this.renderNewUserForm);
     };
-    
+
     //fetch request
     getItems() {
         fetch(this.url + '/items')
@@ -72,6 +72,7 @@ class AppContainer {
         btn.setAttribute('id', "item.user.email")
         btn.innerHTML = "Email Seller"
         })
+
     };
 
     //delete items: would like to change this to delete a single item when called upon by an eventlistener
@@ -82,6 +83,7 @@ class AppContainer {
             })
             .then(resp => resp.json())
             .then(data => console.log(data))
+            .catch(err => console.log(err))
         })
     }
 
@@ -153,7 +155,14 @@ class AppContainer {
         btn.setAttribute('type',"button")
         btn.setAttribute('class',"btn btn-primary btn-sm")
         btn.setAttribute('id', "submitNewItem")
-        btn.innerHTML = "Submit"
+        btn.innerHTML = "Submit";
+
+        this.test();
+    }
+
+    test() {
+        const sni = document.getElementById("submitNewItem")
+        sni.addEventListener('click', this.createItem);
     }
 
     //renders form to create new user when called upon by event listener    
@@ -205,9 +214,13 @@ class AppContainer {
         input.insertAdjacentText('afterend', "Email")
         input1.insertAdjacentText('afterend', "Password")
         input2.insertAdjacentText('afterend', "Confirm Password")
-        btn.setAttribute('type',"button")
+        btn.setAttribute('type',"submit")
         btn.setAttribute('class',"btn btn-primary btn-sm")
         btn.setAttribute('id', "submitNewUser")
-        btn.innerHTML = "Submit"
+        btn.innerHTML = "Submit";
+    }
+
+    createItem() {
+        console.log("hello")
     }
 }

@@ -253,7 +253,7 @@ class AppContainer {
         .then(data => console.log(data))
         .catch(err => console.log(err));
 
-        this.clearPage
+        this.clearPage();
     };
 
     //stores newly created item in api
@@ -277,7 +277,7 @@ class AppContainer {
         .then(data => console.log(data))
         .catch(err => console.log(err));
 
-        this.clearPage
+        this.clearPage();
     };
 
     //renders form to create new user when called upon by event listener    
@@ -373,8 +373,8 @@ class AppContainer {
         .then(resp => resp.json())
         .then(data => console.log(data))
         .catch(err => console.log(err));
-
-        this.clearPage
+        
+        this.clearPage();
     }
     
 }

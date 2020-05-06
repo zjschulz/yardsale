@@ -22,6 +22,9 @@ class AppContainer {
 
         const clp = document.getElementById("clearPage")
         clp.addEventListener("click", this.clearPage);
+
+        const lof = document.getElementById("logOut")
+        lof.addEventListener("click", this.logout);
     };
 
     clearPage() {
@@ -373,8 +376,24 @@ class AppContainer {
         .then(resp => resp.json())
         .then(data => console.log(data))
         .catch(err => console.log(err));
-        
+
         this.clearPage();
+    }
+
+    //function to logout user
+    logout() {
+        fetch(`http://localhost:3000/logout`, {
+            method: 'DELETE',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+                //"X-CSRF-Token": this.getCookie("CSRF-TOKEN")
+            },
+            withCredentials: true
+        })
+        .then(resp => resp.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err));
     }
     
 }

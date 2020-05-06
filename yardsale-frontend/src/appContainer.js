@@ -214,7 +214,7 @@ class AppContainer {
     //binding submit new item button to createItem function
     bindSubmitItem() {
         const sni = document.getElementById("submitNewItem")
-        sni.addEventListener('click', this.createItem);
+        sni.addEventListener('click', () => this.createItem(event));
     };
 
     //binding submit new user button to createUser function
@@ -224,7 +224,8 @@ class AppContainer {
     };
 
     //stores newly created item in api
-    createItem() {
+    createItem(event) {
+        event.preventDefault();
         const form = document.getElementById('form-item')
         fetch(`http://localhost:3000/items`, {
             method: 'POST',
@@ -321,17 +322,35 @@ class AppContainer {
     //binding submit new user button to createUser function
     bindSubmitLogIn() {
         const sli = document.getElementById("submitLogIn")
-        sli.addEventListener('click', this.login);
+        sli.addEventListener('click', () => this.login(event));
     };
     
+    getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+    }
+
     //function to log in user
-    login() {
+    login(event) {
+        event.preventDefault();
         const form = document.getElementById('form-user')
         fetch(`http://localhost:3000/sessions`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                "X-CSRF-Token": this.getCookie("CSRF-TOKEN")
             },
             body: JSON.stringify({
                 email: form.email.value,

@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
       user = User
               .find_by(email: params[:email])
               .try(:authenticate, params[:password])
-  
+      binding.pry
       if user
         session[:user_id] = user.id
         render json: {
@@ -20,14 +20,14 @@ class SessionsController < ApplicationController
     
     def logged_in
       if @current_user
-        render json: {
-          logged_in :true,
-          user: @current_user
-        }
+        #render json: {
+        #  logged_in: true,
+        #  user: @current_user
+        #}
       else
-        render json: {
-          logged_in: false
-        }
+        #render json: {
+        #  logged_in: false
+        #}
       end
     end
 

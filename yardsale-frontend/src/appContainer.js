@@ -15,7 +15,7 @@ class AppContainer {
         cni.addEventListener("click", this.renderNewItemForm.bind(this));
 
         const cnu = document.getElementById("createNewUser")
-        cnu.addEventListener("click", this.renderNewUserForm);
+        cnu.addEventListener("click", this.renderNewUserForm.bind(this));
     };
 
     //fetch request
@@ -26,7 +26,6 @@ class AppContainer {
             data.forEach(item => {
                 new Item(item.id, item.name, item.description, item.image_url, item.price, item.user)
             });
-            //this.renderItems();
         })
         .catch(err => alert(err));
     };
@@ -85,7 +84,7 @@ class AppContainer {
             .then(data => console.log(data))
             .catch(err => console.log(err))
         })
-    }
+    };
 
     //renders form to create new item when called upon by event listener
     renderNewItemForm() {
@@ -149,13 +148,7 @@ class AppContainer {
         btn.setAttribute('id', "submitNewItem")
         btn.innerHTML = "Submit";
         this.bindSubmitItem();
-    }
-
-    //binding submit new item button to createItem function
-    bindSubmitItem() {
-        const sni = document.getElementById("submitNewItem")
-        sni.addEventListener('click', this.createItem);
-    }
+    };
 
     //renders form to create new user when called upon by event listener    
     renderNewUserForm() {
@@ -192,6 +185,7 @@ class AppContainer {
         div.setAttribute('class',"card text-white bg-warning mb-3")
         div.setAttribute('style',"max-width: 20rem;")
         div1.setAttribute('class',"card-body")
+        form.setAttribute('id','form-user')
         label.setAttribute('for',"")
         label.innerHTML = "New Item"
         p.setAttribute('class',"card-text")
@@ -200,17 +194,31 @@ class AppContainer {
         input.setAttribute('type',"text")
         input1.setAttribute('type',"text")
         input2.setAttribute('type',"text")
-        input.setAttribute('name',"name")
-        input1.setAttribute('name',"description")
-        input2.setAttribute('name',"image_url")
+        input.setAttribute('name',"email")
+        input1.setAttribute('name',"password")
+        input2.setAttribute('name',"password_confirmation")
         input.insertAdjacentText('afterend', "Email")
         input1.insertAdjacentText('afterend', "Password")
         input2.insertAdjacentText('afterend', "Confirm Password")
         btn.setAttribute('type',"submit")
         btn.setAttribute('class',"btn btn-primary btn-sm")
         btn.setAttribute('id', "submitNewUser")
-        btn.innerHTML = "Submit";
-    }
+        btn.innerHTML = "Register";
+
+        this.bindSubmitUser();
+    };
+
+    //binding submit new item button to createItem function
+    bindSubmitItem() {
+        const sni = document.getElementById("submitNewItem")
+        sni.addEventListener('click', this.createItem);
+    };
+
+    //binding submit new user button to createUser function
+    bindSubmitUser() {
+        const snu = document.getElementById("submitNewUser")
+        snu.addEventListener('click', this.createUser);
+    };
 
     //stores newly created item in api
     createItem() {
@@ -235,5 +243,28 @@ class AppContainer {
         .catch(err => console.log(err));
 
         location.reload();
-    }
+    };
+
+    //stores newly created item in api
+    createUser() {
+        console.log("hello");
+        const form = document.getElementById('form-user')
+        debugger
+        fetch(`http://localhost:3000/users`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                email: form.email.value,
+                password: form.password.value,
+                password_confirmation: form.password_confirmation.value
+            }),
+            withCredentials: true
+        })
+        .then(resp => resp.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err));
+    };
 }

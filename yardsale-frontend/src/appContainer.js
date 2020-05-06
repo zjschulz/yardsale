@@ -16,6 +16,9 @@ class AppContainer {
 
         const cnu = document.getElementById("createNewUser")
         cnu.addEventListener("click", this.renderNewUserForm.bind(this));
+
+        const lif = document.getElementById("logIn")
+        lif.addEventListener("click", this.renderLogInForm.bind(this));
     };
 
     //fetch request
@@ -222,7 +225,6 @@ class AppContainer {
 
     //stores newly created item in api
     createItem() {
-        console.log("hello");
         const form = document.getElementById('form-item')
         fetch(`http://localhost:3000/items`, {
             method: 'POST',
@@ -247,9 +249,7 @@ class AppContainer {
 
     //stores newly created item in api
     createUser() {
-        console.log("hello");
         const form = document.getElementById('form-user')
-        debugger
         fetch(`http://localhost:3000/users`, {
             method: 'POST',
             headers: {
@@ -267,4 +267,81 @@ class AppContainer {
         .then(data => console.log(data))
         .catch(err => console.log(err));
     };
+
+    //renders form to create new user when called upon by event listener    
+    renderLogInForm() {
+        // Create elements needed to build a card  
+        const div = document.createElement('div')
+        const div1 = document.createElement('div')
+        const form = document.createElement('form')
+        const h4 = document.createElement('h4')
+        const label = document.createElement('label')
+        const p = document.createElement('p')
+        const p1 = document.createElement('p')
+        const input = document.createElement('input')
+        const input1 = document.createElement('input')
+        const btn = document.createElement('button')
+
+        // Append newly created elements into the DOM
+        const body = document.querySelector('body');
+        body.append(div)
+        div.append(div1)
+        div1.append(form)
+        form.append(h4)
+        h4.append(label)
+        form.append(p)
+        p.append(input)
+        form.append(p1)
+        p1.append(input1)
+        form.append(btn)
+
+        // Set content and attributes
+        div.setAttribute('class',"card text-white bg-success mb-3")
+        div.setAttribute('style',"max-width: 20rem;")
+        div1.setAttribute('class',"card-body")
+        form.setAttribute('id','form-user')
+        label.setAttribute('for',"")
+        label.innerHTML = "Log In"
+        p.setAttribute('class',"card-text")
+        p1.setAttribute('class',"card-text")
+        input.setAttribute('type',"text")
+        input1.setAttribute('type',"text")
+        input.setAttribute('name',"email")
+        input1.setAttribute('name',"password")
+        input.insertAdjacentText('afterend', "Email")
+        input1.insertAdjacentText('afterend', "Password")
+        btn.setAttribute('type',"submit")
+        btn.setAttribute('class',"btn btn-primary btn-sm")
+        btn.setAttribute('id', "submitLogIn")
+        btn.innerHTML = "Log In";
+
+        this.bindSubmitLogIn();
+    };
+
+    //binding submit new user button to createUser function
+    bindSubmitLogIn() {
+        const sli = document.getElementById("submitLogIn")
+        sli.addEventListener('click', this.login);
+    };
+    
+    //function to log in user
+    login() {
+        const form = document.getElementById('form-user')
+        fetch(`http://localhost:3000/sessions`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                email: form.email.value,
+                password: form.password.value,
+            }),
+            withCredentials: true
+        })
+        .then(resp => resp.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err));
+    }
+    
 }

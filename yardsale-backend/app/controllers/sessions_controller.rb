@@ -5,7 +5,6 @@ class SessionsController < ApplicationController
       user = User
               .find_by(email: params[:email])
               .try(:authenticate, params[:password])
-      binding.pry
       if user
         session[:user_id] = user.id
         render json: {

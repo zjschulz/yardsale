@@ -1,6 +1,6 @@
 class AppContainer {
     static items = [];
-    user = [];
+    static user = [];
     url = "http://localhost:3000";
 
     //tell the buttons what to do
@@ -19,7 +19,15 @@ class AppContainer {
 
         const lif = document.getElementById("logIn")
         lif.addEventListener("click", this.renderLogInForm.bind(this));
+
+        const clp = document.getElementById("clearPage")
+        clp.addEventListener("click", this.clearPage);
     };
+
+    clearPage() {
+        const clear = document.querySelector('main')
+        clear.innerHTML = ""
+    }
 
     //fetch request
     getItems() {
@@ -47,8 +55,8 @@ class AppContainer {
         const str = document.createElement('strong')
 
         // Append newly created elements into the DOM
-        const body = document.querySelector('body');
-        body.append(div)
+        const main = document.querySelector('main');
+        main.append(div)
         div.append(div1)
         div1.append(h4)
         div1.append(img)
@@ -107,8 +115,8 @@ class AppContainer {
         const input3 = document.createElement('input')
         const btn = document.createElement('button')
         // Append newly created elements into the DOM
-        const body = document.querySelector('body');
-        body.append(div)
+        const main = document.querySelector('main');
+        main.append(div)
         div.append(div1)
         div1.append(form)
         form.append(h4)
@@ -170,8 +178,8 @@ class AppContainer {
         const btn = document.createElement('button')
 
         // Append newly created elements into the DOM
-        const body = document.querySelector('body');
-        body.append(div)
+        const main = document.querySelector('main');
+        main.append(div)
         div.append(div1)
         div1.append(form)
         form.append(h4)
@@ -245,7 +253,7 @@ class AppContainer {
         .then(data => console.log(data))
         .catch(err => console.log(err));
 
-        location.reload();
+        this.clearPage
     };
 
     //stores newly created item in api
@@ -268,6 +276,8 @@ class AppContainer {
         .then(resp => resp.json())
         .then(data => console.log(data))
         .catch(err => console.log(err));
+
+        this.clearPage
     };
 
     //renders form to create new user when called upon by event listener    
@@ -285,8 +295,8 @@ class AppContainer {
         const btn = document.createElement('button')
 
         // Append newly created elements into the DOM
-        const body = document.querySelector('body');
-        body.append(div)
+        const main = document.querySelector('main');
+        main.append(div)
         div.append(div1)
         div1.append(form)
         form.append(h4)
@@ -363,6 +373,8 @@ class AppContainer {
         .then(resp => resp.json())
         .then(data => console.log(data))
         .catch(err => console.log(err));
+
+        this.clearPage
     }
     
 }

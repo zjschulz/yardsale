@@ -99,12 +99,10 @@ class AppContainer {
         const p1 = document.createElement('p')
         const p2 = document.createElement('p')
         const p3 = document.createElement('p')
-        const p4 = document.createElement('p')
         const input = document.createElement('input')
         const input1 = document.createElement('input')
         const input2 = document.createElement('input')
         const input3 = document.createElement('input')
-        const input4 = document.createElement('input')
         const btn = document.createElement('button')
         // Append newly created elements into the DOM
         const body = document.querySelector('body');
@@ -121,36 +119,31 @@ class AppContainer {
         p2.append(input2)
         form.append(p3)
         p3.append(input3)
-        form.append(p4)
-        p4.append(input4)
         form.append(btn)
 
         // Set content and attributes
         div.setAttribute('class',"card text-white bg-info mb-3")
         div.setAttribute('style',"max-width: 20rem;")
         div1.setAttribute('class',"card-body")
+        form.setAttribute('id',"form-item")
         label.setAttribute('for',"")
         label.innerHTML = "New Item"
         p.setAttribute('class',"card-text")
         p1.setAttribute('class',"card-text")
         p2.setAttribute('class',"card-text")
         p3.setAttribute('class',"card-text")
-        p4.setAttribute('class',"card-text")
         input.setAttribute('type',"text")
         input1.setAttribute('type',"text")
         input2.setAttribute('type',"text")
         input3.setAttribute('type',"text")
-        input4.setAttribute('type',"text")
         input.setAttribute('name',"name")
         input1.setAttribute('name',"description")
         input2.setAttribute('name',"image_url")
         input3.setAttribute('name',"price")
-        input4.setAttribute('name',"user")
         input.insertAdjacentText('afterend', "Name")
         input1.insertAdjacentText('afterend', "Description")
         input2.insertAdjacentText('afterend', "Image URL")
-        input3.insertAdjacentText('afterend', "Price")
-        input4.insertAdjacentText('afterend', "User")        
+        input3.insertAdjacentText('afterend', "Price")       
         btn.setAttribute('type',"button")
         btn.setAttribute('class',"btn btn-primary btn-sm")
         btn.setAttribute('id', "submitNewItem")
@@ -221,23 +214,26 @@ class AppContainer {
 
     //stores newly created item in api
     createItem() {
-        console.log("hello")
-        fetch(`${this.url}/items`, {
+        console.log("hello");
+        const form = document.getElementById('form-item')
+        fetch(`http://localhost:3000/items`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',
                 'Accept': 'application/json'
             },
             body: JSON.stringify({
-                name: "something",
-                image_url: "something",
-                description: "something",
-                price: "something",
-                user: "something"
+                name: form.name.value,
+                image_url: form.image_url.value,
+                description: form.description.value,
+                price: form.price.value,
+                user_id: 1
             })
         })
         .then(resp => resp.json())
         .then(data => console.log(data))
         .catch(err => console.log(err));
+
+        location.reload();
     }
 }

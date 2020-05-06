@@ -220,7 +220,7 @@ class AppContainer {
     //binding submit new user button to createUser function
     bindSubmitUser() {
         const snu = document.getElementById("submitNewUser")
-        snu.addEventListener('click', this.createUser);
+        snu.addEventListener('click', () => this.createUser(event));
     };
 
     //stores newly created item in api
@@ -249,7 +249,8 @@ class AppContainer {
     };
 
     //stores newly created item in api
-    createUser() {
+    createUser(event) {
+        event.preventDefault();
         const form = document.getElementById('form-user')
         fetch(`http://localhost:3000/users`, {
             method: 'POST',
@@ -325,6 +326,7 @@ class AppContainer {
         sli.addEventListener('click', () => this.login(event));
     };
     
+    //cookie monster
     getCookie(cname) {
         var name = cname + "=";
         var decodedCookie = decodeURIComponent(document.cookie);

@@ -8,9 +8,6 @@ class AppContainer {
         const cil = document.getElementById("createItemList")
         cil.addEventListener("click", this.renderItems);
 
-        const dil = document.getElementById("deleteItems")
-        dil.addEventListener("click", this.deleteItems);
-
         const cni = document.getElementById("createNewItem")
         cni.addEventListener("click", this.renderNewItemForm.bind(this));
 
@@ -54,7 +51,7 @@ class AppContainer {
         const img = document.createElement('img')
         const p = document.createElement('p')
         const p1 = document.createElement('p')
-        const btn = document.createElement('button')
+        //const btn = document.createElement('button')
         const str = document.createElement('strong')
 
         // Append newly created elements into the DOM
@@ -66,7 +63,7 @@ class AppContainer {
         div1.append(p)
         div1.append(str)
         str.append(p1)
-        div1.append(btn)
+        //div1.append(btn)
 
         // Set content and attributes
         div.setAttribute('class',"card text-white bg-success mb-3")
@@ -80,16 +77,18 @@ class AppContainer {
         p.innerHTML = item.description
         p1.setAttribute('class',"card-text")
         p1.innerHTML = item.price
-        btn.setAttribute('type',"button")
-        btn.setAttribute('class',"btn btn-primary btn-sm")
-        btn.setAttribute('id', "item.user.email")
-        btn.innerHTML = "Email Seller"
+        //btn.setAttribute('type',"button")
+        //btn.setAttribute('class',"btn btn-primary btn-sm")
+        //btn.setAttribute('id', "emailSeller")
+        //btn.innerHTML = "Email Seller"
         })
 
     };
 
     //delete items: would like to change this to delete a single item when called upon by an eventlistener
     deleteItems() {
+        event.preventDefault();
+        const items = AppContainer.items;
         items.forEach(item => {
             fetch(`http://localhost:3000/items/${item.id}`, {
                 method: 'DELETE'
@@ -375,7 +374,7 @@ class AppContainer {
         })
         .then(resp => resp.json())
         .then(data => console.log(data))
-        .catch(err => console.log(err));
+        .catch(err => alert(err));
 
         this.clearPage();
     }

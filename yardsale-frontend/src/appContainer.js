@@ -35,7 +35,7 @@ class AppContainer {
         .then(resp => resp.json())
         .then(data => {
             data.forEach(item => {
-                new Item(item.id, item.name, item.description, item.image_url, item.price, item.user)
+                new Item(item.name, item.description, item.image_url, item.price, item.user)
             });
         })
         .catch(err => alert(err));
@@ -252,7 +252,9 @@ class AppContainer {
             })
         })
         .then(resp => resp.json())
-        .then(data => console.log(data))
+        .then(data => 
+                new Item(data.name, data.description, data.image_url, data.price, data.user)
+            )
         .catch(err => console.log(err));
 
         this.clearPage();

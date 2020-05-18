@@ -1,6 +1,6 @@
 class AppContainer {
     static items = [];
-    static user = [];
+    static user = {};
     url = "http://localhost:3000";
 
     //tell the buttons what to do
@@ -17,8 +17,8 @@ class AppContainer {
         const lif = document.getElementById("logIn")
         lif.addEventListener("click", this.renderLogInForm.bind(this));
 
-        const clp = document.getElementById("clearPage")
-        clp.addEventListener("click", this.clearPage);
+        const clp = document.getElementById("userItems")
+        clp.addEventListener("click", this.renderUserItems.bind(this));
 
         const lof = document.getElementById("logOut")
         lof.addEventListener("click", this.logout);
@@ -43,7 +43,53 @@ class AppContainer {
 
     //create DOM elements
     renderItems() {
+        this.clearPage();
         AppContainer.items.forEach(item => {
+        // Create elements needed to build a card  
+        const div = document.createElement('div')
+        const div1 = document.createElement('div')
+        const h4 = document.createElement('h4')
+        const img = document.createElement('img')
+        const p = document.createElement('p')
+        const p1 = document.createElement('p')
+        //const btn = document.createElement('button')
+        const str = document.createElement('strong')
+
+        // Append newly created elements into the DOM
+        const main = document.querySelector('main');
+        main.append(div)
+        div.append(div1)
+        div1.append(h4)
+        div1.append(img)
+        div1.append(p)
+        div1.append(str)
+        str.append(p1)
+        //div1.append(btn)
+
+        // Set content and attributes
+        div.setAttribute('class',"card text-white bg-success mb-3")
+        div.setAttribute('style',"max-width: 20rem;")
+        div1.setAttribute('class',"card-body")
+        h4.setAttribute('class','card-title')
+        h4.innerHTML = item.name
+        img.setAttribute('src', item.image_url)
+        img.setAttribute('style',"height: 200px; width: 100%; display: block;")
+        p.setAttribute('class',"card-text")
+        p.innerHTML = item.description
+        p1.setAttribute('class',"card-text")
+        p1.innerHTML = item.price
+        //btn.setAttribute('type',"button")
+        //btn.setAttribute('class',"btn btn-primary btn-sm")
+        //btn.setAttribute('id', "emailSeller")
+        //btn.innerHTML = "Email Seller"
+        })
+
+    };
+
+    renderUserItems() {
+        debugger
+        this.clearPage();
+        AppContainer.items.filter(x => x.user.id == AppContainer.user.id).forEach(item => {
         // Create elements needed to build a card  
         const div = document.createElement('div')
         const div1 = document.createElement('div')
@@ -248,7 +294,7 @@ class AppContainer {
                 image_url: form.image_url.value,
                 description: form.description.value,
                 price: form.price.value,
-                user_id: 1
+                user_id: AppContainer.user.id
             })
         })
         .then(resp => resp.json())
@@ -375,7 +421,7 @@ class AppContainer {
             withCredentials: true
         })
         .then(resp => resp.json())
-        .then(data => console.log(data))
+        .then(data => new User(data.user.email, data.user.id))
         .catch(err => alert(err));
 
         this.clearPage();
@@ -393,7 +439,7 @@ class AppContainer {
             withCredentials: true
         })
         .then(resp => resp.json())
-        .then(data => console.log(data))
+        .then(AppContainer.user = {})
         .catch(err => console.log(err));
     }
     

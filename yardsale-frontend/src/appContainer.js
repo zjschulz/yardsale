@@ -43,8 +43,20 @@ class AppContainer {
 
     //create DOM elements
     renderItems() {
-        this.clearPage();
-        AppContainer.items.forEach(item => {
+        const clear = document.querySelector('main');
+        clear.innerHTML = "";
+
+        AppContainer.items.sort(function(a,b) {
+            var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+            var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+            if (nameA < nameB) {
+              return -1; //nameA comes first
+            }
+            if (nameA > nameB) {
+              return 1; // nameB comes first
+            }
+            return 0;  // names must be equal
+          }).forEach(item => {
         // Create elements needed to build a card  
         const div = document.createElement('div')
         const div1 = document.createElement('div')

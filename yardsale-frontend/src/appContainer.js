@@ -64,8 +64,10 @@ class AppContainer {
         const img = document.createElement('img')
         const p = document.createElement('p')
         const p1 = document.createElement('p')
+        const p2 = document.createElement('p')
         //const btn = document.createElement('button')
         const str = document.createElement('strong')
+        const ita = document.createElement('i')
 
         // Append newly created elements into the DOM
         const main = document.querySelector('main');
@@ -75,6 +77,8 @@ class AppContainer {
         div1.append(img)
         div1.append(p)
         div1.append(str)
+        div1.append(ita)
+        ita.append(p2)
         str.append(p1)
         //div1.append(btn)
 
@@ -90,6 +94,8 @@ class AppContainer {
         p.innerHTML = item.description
         p1.setAttribute('class',"card-text")
         p1.innerHTML = item.price
+        p2.setAttribute('class',"card-text")
+        p2.innerHTML = "Seller Email: " + item.user.email
         //btn.setAttribute('type',"button")
         //btn.setAttribute('class',"btn btn-primary btn-sm")
         //btn.setAttribute('id', "emailSeller")
@@ -99,8 +105,9 @@ class AppContainer {
     };
 
     renderUserItems() {
-        debugger
-        this.clearPage();
+        const clear = document.querySelector('main');
+        clear.innerHTML = "";
+
         AppContainer.items.filter(x => x.user.id == AppContainer.user.id).forEach(item => {
         // Create elements needed to build a card  
         const div = document.createElement('div')
@@ -124,7 +131,7 @@ class AppContainer {
         //div1.append(btn)
 
         // Set content and attributes
-        div.setAttribute('class',"card text-white bg-success mb-3")
+        div.setAttribute('class',"card text-white bg-info mb-3")
         div.setAttribute('style',"max-width: 20rem;")
         div1.setAttribute('class',"card-body")
         h4.setAttribute('class','card-title')
@@ -159,6 +166,8 @@ class AppContainer {
 
     //renders form to create new item when called upon by event listener
     renderNewItemForm() {
+        const clear = document.querySelector('main');
+        clear.innerHTML = "";
         // Create elements needed to build a card  
         const div = document.createElement('div')
         const div1 = document.createElement('div')
@@ -192,7 +201,7 @@ class AppContainer {
         form.append(btn)
 
         // Set content and attributes
-        div.setAttribute('class',"card text-white bg-info mb-3")
+        div.setAttribute('class',"card text-white bg-warning mb-3")
         div.setAttribute('style',"max-width: 20rem;")
         div1.setAttribute('class',"card-body")
         form.setAttribute('id',"form-item")
@@ -223,6 +232,8 @@ class AppContainer {
 
     //renders form to create new user when called upon by event listener    
     renderNewUserForm() {
+        const clear = document.querySelector('main');
+        clear.innerHTML = "";
         // Create elements needed to build a card  
         const div = document.createElement('div')
         const div1 = document.createElement('div')
@@ -253,7 +264,7 @@ class AppContainer {
         form.append(btn)
 
         // Set content and attributes
-        div.setAttribute('class',"card text-white bg-warning mb-3")
+        div.setAttribute('class',"card text-white bg-success mb-3")
         div.setAttribute('style',"max-width: 20rem;")
         div1.setAttribute('class',"card-body")
         form.setAttribute('id','form-user')
@@ -344,6 +355,8 @@ class AppContainer {
 
     //renders form to create new user when called upon by event listener    
     renderLogInForm() {
+        const clear = document.querySelector('main');
+        clear.innerHTML = "";
         // Create elements needed to build a card  
         const div = document.createElement('div')
         const div1 = document.createElement('div')
@@ -370,7 +383,7 @@ class AppContainer {
         form.append(btn)
 
         // Set content and attributes
-        div.setAttribute('class',"card text-white bg-success mb-3")
+        div.setAttribute('class',"card text-white bg-info mb-3")
         div.setAttribute('style',"max-width: 20rem;")
         div1.setAttribute('class',"card-body")
         form.setAttribute('id','form-user')

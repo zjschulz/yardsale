@@ -465,7 +465,7 @@ class AppContainer {
         })
         .then(resp => resp.json())
         .then(AppContainer.user = {})
-        .catch(err => console.log(err));
+        .catch(err => console.log("logout error", err));
     }
     
 }

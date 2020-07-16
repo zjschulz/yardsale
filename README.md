@@ -16,7 +16,7 @@ Redirect to the ./yardsale/yardsale-backend path in the terminal. Run "bundle in
 
 To initiate my application, type "rails s" whilst in the ./yardsale/yardsale-backend to access the Rails server.
 
-Redirect to the ./yardsale/yardsale-frontend path in the terminal. Type "python -m SimpleHTTPServer" to initiate a python server on the local environment.
+Redirect to the ./yardsale/yardsale-frontend path in the terminal. Type "python3 -m http.server 8000" to initiate a python server on the local environment.
 
 The local environment will now exist at url: http://localhost:8000.
 

@@ -3,7 +3,6 @@ class AppContainer {
     static user = {};
     url = "http://localhost:3000";
 
-    //tell the buttons what to do
     bindEventListeners() {
         const cil = document.getElementById("createItemList")
         cil.addEventListener("click", this.renderItems);
@@ -29,7 +28,6 @@ class AppContainer {
         clear.innerHTML = ""
     }
 
-    //fetch request
     getItems() {
         fetch(this.url + '/items')
         .then(resp => resp.json())
@@ -84,7 +82,7 @@ class AppContainer {
 
         // Set content and attributes
         div.setAttribute('class',"card text-white bg-success mb-3")
-        div.setAttribute('style',"max-width: 20rem;")
+        div.setAttribute('style',"width: 20rem; float:left; margin-right:20px")
         div1.setAttribute('class',"card-body")
         h4.setAttribute('class','card-title')
         h4.innerHTML = item.name
@@ -132,7 +130,7 @@ class AppContainer {
 
         // Set content and attributes
         div.setAttribute('class',"card text-white bg-info mb-3")
-        div.setAttribute('style',"max-width: 20rem;")
+        div.setAttribute('style',"width: 20rem; float:left; margin-right:20px")
         div1.setAttribute('class',"card-body")
         h4.setAttribute('class','card-title')
         h4.innerHTML = item.name

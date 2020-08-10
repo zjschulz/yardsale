@@ -21,6 +21,7 @@ class AppContainer {
 
         const lof = document.getElementById("logOut")
         lof.addEventListener("click", this.logout);
+
     };
 
     clearPage() {
@@ -105,16 +106,16 @@ class AppContainer {
     renderUserItems() {
         const clear = document.querySelector('main');
         clear.innerHTML = "";
-
+        
         AppContainer.items.filter(x => x.user.id == AppContainer.user.id).forEach(item => {
-        // Create elements needed to build a card  
+        // Create elements needed to build a card
         const div = document.createElement('div')
         const div1 = document.createElement('div')
         const h4 = document.createElement('h4')
         const img = document.createElement('img')
         const p = document.createElement('p')
         const p1 = document.createElement('p')
-        //const btn = document.createElement('button')
+        const btn = document.createElement('button')
         const str = document.createElement('strong')
 
         // Append newly created elements into the DOM
@@ -126,7 +127,7 @@ class AppContainer {
         div1.append(p)
         div1.append(str)
         str.append(p1)
-        //div1.append(btn)
+        div1.append(btn)
 
         // Set content and attributes
         div.setAttribute('class',"card text-white bg-info mb-3")
@@ -140,26 +141,23 @@ class AppContainer {
         p.innerHTML = item.description
         p1.setAttribute('class',"card-text")
         p1.innerHTML = item.price
-        //btn.setAttribute('type',"button")
-        //btn.setAttribute('class',"btn btn-primary btn-sm")
-        //btn.setAttribute('id', "emailSeller")
-        //btn.innerHTML = "Email Seller"
+        btn.setAttribute('type',"button")
+        btn.setAttribute('class',"btn btn-primary btn-sm")
+        btn.setAttribute('id', "deleteItem")
+        btn.innerHTML = "Delete";
+        btn.addEventListener('click', () => this.deleteItem(item))
         })
 
     };
 
     //delete items: would like to change this to delete a single item when called upon by an eventlistener
-    deleteItems() {
-        event.preventDefault();
-        const items = AppContainer.items;
-        items.forEach(item => {
-            fetch(`http://localhost:3000/items/${item.id}`, {
-                method: 'DELETE'
-            })
-            .then(resp => resp.json())
-            .then(data => console.log(data))
-            .catch(err => console.log(err))
+    deleteItem(item) {
+        fetch(`http://localhost:3000/items/${item.id}`, {
+            method: 'DELETE'
         })
+        .then(resp => resp.json())
+        .then(data => alert(data.message))
+        .catch(err => console.log(err))
     };
 
     //renders form to create new item when called upon by event listener
@@ -298,6 +296,11 @@ class AppContainer {
     bindSubmitUser() {
         const snu = document.getElementById("submitNewUser")
         snu.addEventListener('click', () => this.createUser(event));
+    };
+
+    bindDeleteItem() {
+        const dltitem = document.getElementById("deleteItem")
+        dltitem.addEventListener('click', () => this.deleteItem(event));
     };
 
     //stores newly created item in api

@@ -33,9 +33,7 @@ class AppContainer {
         fetch(this.url + '/items')
         .then(resp => resp.json())
         .then(data => {
-            debugger;
             data.forEach(item => {
-                debugger;
                 new Item(item.name, item.description, item.image_url, item.price, item.user, item.id)
             });
         })
@@ -145,7 +143,7 @@ class AppContainer {
         p1.innerHTML = item.price
         btn.setAttribute('type',"button")
         btn.setAttribute('class',"btn btn-primary btn-sm")
-        btn.setAttribute('id', item.id)
+        btn.setAttribute('id', "deleteItem")
         btn.innerHTML = "Delete";
         btn.addEventListener('click', () => this.deleteItem(item))
         })
@@ -320,7 +318,7 @@ class AppContainer {
         })
         .then(resp => resp.json())
         .then(data => 
-                new Item(data.name, data.description, data.image_url, data.price, data.user)
+                new Item(data.name, data.description, data.image_url, data.price, data.user, data.id)
             )
         .catch(err => console.log(err));
 
@@ -464,6 +462,8 @@ class AppContainer {
         .then(resp => resp.json())
         .then(AppContainer.user = {})
         .catch(err => console.log("logout error", err));
+
+        this.clearPage();
     }
     
 }

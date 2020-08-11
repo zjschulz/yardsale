@@ -33,7 +33,9 @@ class AppContainer {
         fetch(this.url + '/items')
         .then(resp => resp.json())
         .then(data => {
+            debugger;
             data.forEach(item => {
+                debugger;
                 new Item(item.name, item.description, item.image_url, item.price, item.user, item.id)
             });
         })
@@ -296,11 +298,6 @@ class AppContainer {
     bindSubmitUser() {
         const snu = document.getElementById("submitNewUser")
         snu.addEventListener('click', () => this.createUser(event));
-    };
-
-    bindDeleteItem() {
-        const dltitem = document.getElementById("deleteItem")
-        dltitem.addEventListener('click', () => this.deleteItem(event));
     };
 
     //stores newly created item in api

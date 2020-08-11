@@ -34,7 +34,7 @@ class AppContainer {
         .then(resp => resp.json())
         .then(data => {
             data.forEach(item => {
-                new Item(item.name, item.description, item.image_url, item.price, item.user)
+                new Item(item.name, item.description, item.image_url, item.price, item.user, item.id)
             });
         })
         .catch(err => alert(err));
@@ -143,7 +143,7 @@ class AppContainer {
         p1.innerHTML = item.price
         btn.setAttribute('type',"button")
         btn.setAttribute('class',"btn btn-primary btn-sm")
-        btn.setAttribute('id', "deleteItem")
+        btn.setAttribute('id', item.id)
         btn.innerHTML = "Delete";
         btn.addEventListener('click', () => this.deleteItem(item))
         })

@@ -156,8 +156,11 @@ class AppContainer {
             method: 'DELETE'
         })
         .then(resp => resp.json())
-        .then(data => alert(data.message))
+        .then(data =>alert(data.message))
+        .then(AppContainer.items = AppContainer.items.filter(x => x.id !== item.id))
         .catch(err => console.log(err))
+
+        this.clearPage();
     };
 
     //renders form to create new item when called upon by event listener

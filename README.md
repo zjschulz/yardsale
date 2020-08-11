@@ -10,7 +10,7 @@ Place the below line in your terminal
 
 Open the folder created by the above line.
 
-Redirect to the ./yardsale/yardsale-backend path in the terminal. Run "bundle install"
+Redirect to the ./yardsale/yardsale-backend path in the terminal. Run "bundle install" and "rails db:migrate"
 
 ## Usage
 

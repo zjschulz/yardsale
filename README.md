@@ -1,6 +1,6 @@
 # YardSale_App
 
-This application was designed with dog shelters, SPCA centers, and other various locations where volunteers are needed to walk dogs. This lets a user log in, create volunteers, and add walks with dogs for each volunteer. The duration of each walk is monitored and each volunteer has their total duration of walks present on the volunteer page.
+The creation of this application was inspired by my desire to provide independent crafter's a simple tool other than mainstream marketing services to bridge the "social distancing" issues of 2020 when it comes to needing a place to sell goods to a local community. The application allows a user to sign in, create items, view all items or just their own items, and delete their own items.
 
 ## Installation
 
